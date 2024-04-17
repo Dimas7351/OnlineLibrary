@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Person</title>
+</head>
+<body>
+
+<p th:text="${person.getName() + ', ' + person.getDateOfBirth()}">value</p>
+<div th:if="${books.isEmpty()}">
+    <p>Человек пока не взял ни одной книги</p>
+</div>
+<!--<p th:if="person" th:text="${person.getName() + ', ' + person.getYear()}">value</p>-->
+<div th:if="${!books.isEmpty()}">
+    <hr/>
+    <b>Книги:</b>
+    <br/>
+    <table th:each="book : ${books}">
+        <tr>
+            <span th:style="${book.isExpired()}? 'color: red' : 'color: black'"
+                  th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear()}">
+                book
+            </span>
+        </tr>
+    </table>
+</div>
+<hr/>
+<form style="display: inline;" th:method="GET" th:action="@{/people/{id}/edit(id=${person.getId()})}">
+    <input type="submit" value="Редактировать">
+</form>
+<form style="display: inline;" th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+    <input type="submit" value="Удалить">
+</form>
+</body>
+</html>

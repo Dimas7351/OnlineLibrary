@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage users</title>
+</head>
+<body>
+
+<p th:text="'Выберите пользователя, чтобы совершить действие'">Какое действие совершить?</p>
+<label for="person">Выберите человека: </label>
+<select th:object="${person}" th:field="*{id}" id="person">
+    <option th:each="person : ${people}" th:value="${person.getId()}"
+            th:text="${person.getName()}"></option>
+</select>
+
+<input type="submit" value="Назначить книгу">
+
+</body>
+</html>
