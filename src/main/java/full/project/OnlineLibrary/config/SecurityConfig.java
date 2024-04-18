@@ -54,7 +54,9 @@ public class SecurityConfig {
                                    System.out.println(username);
                                    Integer userId = peopleService.getUserIdByName(username);
                                    System.out.println(userId);
-                                   response.sendRedirect("/people/show/" + userId);
+//                                   response.sendRedirect("/people/show/" + userId);
+                                   response.sendRedirect("/books");
+
                                }
                            }
                        })

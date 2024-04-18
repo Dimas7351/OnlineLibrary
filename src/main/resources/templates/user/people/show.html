@@ -26,14 +26,14 @@
 </div>
 <hr/>
 
-<form style="display: inline;" th:method="GET" th:action="@{/templates/user/books}">
+<form style="display: inline;" th:method="GET" th:action="@{/books}">
     <input type="submit" value="Посмотреть книги">
 </form>
 
-<form style="display: inline;" th:method="GET" th:action="@{/templates/user/people/{id}/edit(id=${person.getId()})}">
+<form style="display: inline;" th:method="GET" th:action="@{/people/{id}/edit(id=${person.getId()})}">
     <input type="submit" value="Редактировать">
 </form>
-<form style="display: inline;" th:method="DELETE" th:action="@{/templates/user/people/{id}(id=${person.getId()})}">
+<form style="display: inline;" th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
     <input type="submit" value="Удалить">
 </form>
 </body>

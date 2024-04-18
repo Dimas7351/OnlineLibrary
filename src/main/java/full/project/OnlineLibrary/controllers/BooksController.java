@@ -118,16 +118,17 @@ public class BooksController {
     }
 
     @PatchMapping("/{id}/set_owner")
-    public String setUser(@ModelAttribute("person") Person person,
+    public String setUser(@RequestParam("personName") String username,
                           @PathVariable("id") int id){
+        Person person = peopleService.findByName(username).orElse(null);
         booksService.setOwner(id, person);
-        return "redirect:/user/books";
+        return "redirect:/books";
     }
 
     @PatchMapping("/{id}/release")
     public String releaseBook(@PathVariable("id") int id){
         booksService.releaseBook(id);
-        return "redirect:/user/books/" + id;
+        return "redirect:books/" + id;
     }
 
     @GetMapping("/search")
