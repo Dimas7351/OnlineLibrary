@@ -25,6 +25,11 @@
     </table>
 </div>
 <hr/>
+
+<form style="display: inline;" th:method="GET" th:action="@{/books}">
+    <input type="submit" value="Посмотреть книги">
+</form>
+
 <form style="display: inline;" th:method="GET" th:action="@{/people/{id}/edit(id=${person.getId()})}">
     <input type="submit" value="Редактировать">
 </form>

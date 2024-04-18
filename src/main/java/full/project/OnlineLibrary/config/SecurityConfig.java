@@ -4,6 +4,7 @@ import full.project.OnlineLibrary.services.PersonDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -36,6 +37,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/admin").hasRole("ADMIN") // Можно hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/auth/login", "/auth/registration","/error").permitAll()
+//                        2.requestMatchers(HttpMethod.DELETE, "/books/{id}").hasRole("ADMIN")
                         .anyRequest().hasAnyRole("USER", "ADMIN"))
                .formLogin(form -> form
                         .loginPage("/auth/login")

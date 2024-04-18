@@ -1,26 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login page</title>
-</head>
-<body>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>Login page</title>
+  </head>
+  <body>
 
-<form name="f" method="post" action="/process_login">
-  <input type="hidden" th:name="${_csrf.getParameterName()}" th:value="${_csrf.token}">
+  <form name="f" method="post" action="/process_login">
+    <input type="hidden" th:name="${_csrf.getParameterName()}" th:value="${_csrf.token}">
 
-  <label for="name">Введите имя пользователя: </label>
-  <input type="text" name="username" id="name"/>
-  <br/>
-  <label for="password">Введите пароль</label>
-  <input type="password" name="password" id="password"/>
-  <br/>
-  <input type="submit" value="Login"/>
+    <label for="name">Введите имя пользователя: </label>
+    <input type="text" name="username" id="name"/>
+    <br/>
+    <label for="password">Введите пароль</label>
+    <input type="password" name="password" id="password"/>
+    <br/>
+    <input type="submit" value="Sign in"/>
 
-  <div th:if="${param.error}" style="color: red">
-    Неправильные имя или пароль
-  </div>
-</form>
+    <div th:if="${param.error}" style="color: red">
+      Неправильные имя или пароль
+    </div>
+  </form>
 
-</body>
-</html>
+  <form method="GET" action="/auth/registration">
+    <input type="submit" value="Sign up"/>
+  </form>
+
+
+  </body>
+  </html>

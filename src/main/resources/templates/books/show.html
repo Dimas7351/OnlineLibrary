@@ -36,9 +36,14 @@
     <br/>
 </form>
 <br/>
-<form style="display: inline;" th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}">
-    <input type="submit" value="Удалить">
-</form>
+
+<div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+    <form style="display: inline;" th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}">
+        <input type="submit" value="Удалить">
+    </form>
+</div>
+
+
 
 </body>
 </html>
