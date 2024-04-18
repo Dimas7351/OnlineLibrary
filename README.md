@@ -4,7 +4,7 @@
 
 
 Стек:
-Spring Framework (core, security, boot), JPA, Hibernate ORM.
+Spring Framework (core, security, boot), JPA, Hibernate ORM, Validator
 
 В проекте есть следующие структурные единицы:
 * controllers
