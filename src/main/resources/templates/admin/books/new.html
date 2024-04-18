@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form th:method="POST" th:action="@{/books}" th:object="${book}">
+<form th:method="POST" th:action="@{/templates/user/books}" th:object="${book}">
     <label for="name">Введите название книги: </label>
     <input type="text" th:field="*{name}"  id="name"/>
     <br/>

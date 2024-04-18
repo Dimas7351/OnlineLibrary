@@ -70,4 +70,24 @@ public class PeopleService {
     public Optional<Person> findByName(String name){
         return peopleRepository.findByName(name);
     }
+
+    public Integer getUserIdByName(String name){
+        Optional<Person> personOptional = findByName(name);
+        if (personOptional.isPresent()) {
+            Person person = personOptional.get();
+            return person.getId();
+        } else {
+            return null;
+        }
+    }
+
+    public String getUserRole(String name) {
+        Optional<Person> personOptional = findByName(name);
+        if (personOptional.isPresent()) {
+            Person person = personOptional.get();
+            return person.getRole();
+        } else {
+            return "ROLE_NOT_FOUND";
+        }
+    }
 }

@@ -29,14 +29,14 @@ public class PeopleController {
     public String index(Model model){
         model.addAttribute("people", peopleService.findAll());
 
-        return "people/index";
+        return "user/people/index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model){
         model.addAttribute("person", peopleService.findOne(id));
         model.addAttribute("books", peopleService.getCurrentBooks(id));
-        return "people/show";
+        return "user/people/show";
     }
 
     @GetMapping("/new")

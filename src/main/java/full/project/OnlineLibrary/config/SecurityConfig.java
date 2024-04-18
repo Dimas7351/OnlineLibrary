@@ -1,15 +1,16 @@
 package full.project.OnlineLibrary.config;
 
+import full.project.OnlineLibrary.services.PeopleService;
 import full.project.OnlineLibrary.services.PersonDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -22,10 +23,12 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final PersonDetailsService personDetailsService;
+    private final PeopleService peopleService;
 
     @Autowired
-    public SecurityConfig(PersonDetailsService personDetailsService) {
+    public SecurityConfig(PersonDetailsService personDetailsService, PeopleService peopleService) {
         this.personDetailsService = personDetailsService;
+        this.peopleService = peopleService;
     }
 
     @Bean
@@ -42,7 +45,19 @@ public class SecurityConfig {
                .formLogin(form -> form
                         .loginPage("/auth/login")
                         .loginProcessingUrl("/process_login")
-                        .defaultSuccessUrl("/books", true)
+                       .successHandler((request, response, authentication) -> {
+                           for (GrantedAuthority auth : authentication.getAuthorities()) {
+                               if (auth.getAuthority().equals("ROLE_ADMIN")) {
+                                   response.sendRedirect("/books");
+                               } else if (auth.getAuthority().equals("ROLE_USER")) {
+                                   String username = authentication.getName();
+                                   System.out.println(username);
+                                   Integer userId = peopleService.getUserIdByName(username);
+                                   System.out.println(userId);
+                                   response.sendRedirect("/people/show/" + userId);
+                               }
+                           }
+                       })
                         .failureUrl("/auth/login?error")) // передаст контроллер на представление
                 .logout(logout -> logout
                         .logoutUrl("/logout")

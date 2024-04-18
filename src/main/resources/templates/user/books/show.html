@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book</title>
+</head>
+<body>
+
+<p th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear()}">value</p>
+
+<div th:if="${owner}">
+    <div th:if="${owner.getName().equals(principal)}">
+        <p th:text="${'Эта книга сейчас у вас'}"></p>
+    <form th:method="PATCH" th:action="@{/books/{id}/release(id=${book.getId()})}">
+        <input type="submit" value="Вернуть книгу">
+    </form>
+    </div>
+        <div th:unless="${owner.getName().equals(principal)}">
+            <p th:text="${'Эта книга сейчас занята'}"></p>
+        </div>
+    </div>
+
+
+<div th:unless="${owner}">
+    <p th:text="${'Эта книга сейчас свободна'}"></p>
+    <form th:method="PATCH" th:action="@{/books/{id}/set_owner(id=${book.getId()})}">
+        <input type="submit" value="Взять книгу">
+    </form>
+</div>
+
+</body>
+</html>
