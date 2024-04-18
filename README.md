@@ -2,6 +2,7 @@
 
 В данном проекте присутствуют две роли: user (читатель) и admin (библиотекарь). Пользователь может брать и возвращать книги, а также просматривать все доступные книги. Библиотекарю дозволено проводить операции Read, Update, Delete для книг и пользователей.
 
+Начальный проект с использованием jdbc и apache tomcat - <a href="https://github.com/Dimas7351/library_jdbc">jdbc library</a>
 
 Стек:
 Spring Framework (core, security, boot), JPA, Hibernate ORM, Validator
